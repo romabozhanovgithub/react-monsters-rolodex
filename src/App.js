@@ -3,7 +3,7 @@ import { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  constructor() {
+  constructor() { // constructor() is called first, before render()
     super();
 
     this.state = {
@@ -13,7 +13,6 @@ class App extends Component {
 
   componentDidMount() { // lifecycle method, called after render(), when component is mounted, it is called only once
     // componentDidMount() can be executed twice, because of <React.StrictMode> in index.js
-    console.log('componentDidMount()');
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => this.setState(() => {
@@ -25,7 +24,7 @@ class App extends Component {
     ));
   }
 
-  render() {
+  render() { // render() is called after constructor() and when state changes
     return (
       <div className="App">
         {
