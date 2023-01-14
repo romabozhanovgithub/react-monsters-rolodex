@@ -7,48 +7,26 @@ class App extends Component {
     super();
 
     this.state = {
-      monsters: [
-        {
-          id: 1,
-          name: "Frankenstein",
-        },
-        {
-          id: 2,
-          name: "Dracula",
-        },
-        {
-          id: 3,
-          name: "Zombie",
-        }, 
-      ]
+      monsters: [],
     };
+  }
+
+  componentDidMount() { // lifecycle method, called after render(), when component is mounted, it is called only once
+    // componentDidMount() can be executed twice, because of <React.StrictMode> in index.js
+    console.log('componentDidMount()');
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => this.setState(() => {
+        return { monsters: users };
+      },
+      () => {
+        console.log(this.state);
+      }
+    ));
   }
 
   render() {
     return (
-      // <p>
-      //   Hello {this.state.name.first}{this.state.name.last}!
-      // </p>
-      // <button onClick={() => {
-      //   // this.setState({
-      //   //   name: { first: "React", last: "JSX" }
-      //   // }); // This runs asynchronously
-      //   // console.log(this.state); // This runs synchronously, so it will print the old state
-
-      //   this.setState(
-      //     (state, props) => { // state is equal to the current state
-      //       return {
-      //         name: { first: "React", last: "JSX" }
-      //       }
-      //     },
-      //     () => { // This callback runs after the state is updated and optional
-      //       console.log(this.state);
-      //     }
-      //   );
-      // }}>
-      //   Click Me!
-      // </button>
-
       <div className="App">
         {
           this.state.monsters.map(
