@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import CardList from './components/card-list/card-list.component';
-import './App.css';
+import SearchBox from './components/search-box/search-box.component';
+import './App.css'; // css applied to entire project
 
 
 class App extends Component {
@@ -52,11 +53,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearchBox
+          className="monsters=search-box"
           placeholder="Search monsters"
-          onChange={handleSearchChange}
+          onChangeHandler={handleSearchChange}
         />
         <CardList monsters={filteredMonsters} />
       </div>
